@@ -1,0 +1,13 @@
+{
+  props.values.test.map(({text}, index) => (
+    <TextInput
+      key={index}
+      onChangeText={props.handleChange(`test[${index}]`)}
+      value={props.values.test[index]}
+    />
+  ));
+}
+<Button
+  title="test"
+  onPress={() => props.setFieldValue('test', [...props.values.test, ''])}
+/>;
