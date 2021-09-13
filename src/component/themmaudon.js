@@ -22,7 +22,7 @@ export default function Themmaudon({submitHandler}) {
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderStyle: 'dashed',
+    borderStyle: 'solid',
     borderColor: 'black',
     margin: 20,
     borderRadius: 10,

@@ -17,10 +17,10 @@ export default function DsMaudon({navigation}) {
   ]);
 
   const pressHandler = id => {
-    const pass = maudon[id - 1];
-    navigation.navigate('Don 1', {
-      name: pass.name,
-      id: pass.id,
+    const pass = maudon[id - 1].name;
+    const route = 'Don ' + id;
+    navigation.navigate(route, {
+      name: pass,
     });
   };
 

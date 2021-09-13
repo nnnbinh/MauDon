@@ -19,21 +19,18 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 const ReviewSchema = yup.object({
   tên: yup.string().required(),
   ngày_sinh: yup.mixed().notOneOf(['Chọn ngày']),
-  dc_tp: yup.string().required(),
-  dc_quận_huyện: yup.string().required(),
-  dc_phường_xã: yup.string().required(),
+  nơi_sinh: yup.string().required(),
   địa_chỉ: yup.string().required(),
   mssv: yup.number().required().positive().integer(),
   lớp: yup.string().required(),
   khoa: yup.string().required(),
   khóa: yup.number().required().positive().integer(),
   năm: yup.number().required().positive().integer(),
-  năm_bắt_đầu: yup.number().required().positive().integer(),
-  năm_kết_thúc: yup.number().required().positive().integer(),
+  lý_do: yup.string().required(),
   kỷ_luật: yup.string().required(),
 });
 
-export default function DonTamHoanNVQS({navigation}) {
+export default function GxnSinhVien({navigation}) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -53,21 +50,19 @@ export default function DonTamHoanNVQS({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
-              form: 'Đơn Tạm hoãn NVQS',
               tên: '',
               ngày_sinh: 'Chọn ngày',
               giới_tính: 'nam',
-              dc_tp: '',
-              dc_quận_huyện: '',
-              dc_phường_xã: '',
+              nơi_sinh: '',
               địa_chỉ: '',
               mssv: '',
               lớp: '',
               khoa: '',
               khóa: '',
               năm: '',
-              năm_bắt_đầu: '',
-              năm_kết_thúc: '',
+              học_kỳ: '1',
+              hệ: 'CĐ Chính Quy',
+              lý_do: 'Tạm hoãn NVQS',
               kỷ_luật: 'Không',
             }}
             onSubmit={(val, actions) => {
@@ -91,7 +86,6 @@ export default function DonTamHoanNVQS({navigation}) {
                   onBlur={props.handleBlur('tên')}
                   value={props.values.tên}
                 />
-
                 <View>
                   <Text style={GlobalStyles.colorCrimson}>
                     {props.touched.ngày_sinh && props.errors.ngày_sinh
@@ -148,53 +142,20 @@ export default function DonTamHoanNVQS({navigation}) {
                     </View>
                   </View>
                 </View>
-
-                <Text style={GlobalStyles.subLabel}>Địa chỉ thường trú: </Text>
-                {/* Địa chỉ (Thành phố) */}
+                {/* nơi sinh */}
                 <Text style={GlobalStyles.colorCrimson}>
-                  {props.touched.dc_tp && props.errors.dc_tp
+                  {props.touched.nơi_sinh && props.errors.nơi_sinh
                     ? 'Thông tin không chính xác'
                     : ''}
                 </Text>
-                <Text style={GlobalStyles.label}>Tỉnh/ThànhPhố: </Text>
+                <Text style={GlobalStyles.label}>Nơi sinh: </Text>
                 <TextInput
                   style={GlobalStyles.input}
-                  placeholder="Thành phố"
-                  onChangeText={props.handleChange('dc_tp')}
-                  value={props.values.dc_tp}
-                  onBlur={props.handleBlur('dc_tp')}
+                  placeholder="TPHCM"
+                  onChangeText={props.handleChange('nơi_sinh')}
+                  value={props.values.nơi_sinh}
+                  onBlur={props.handleBlur('nơi_sinh')}
                 />
-
-                {/* địa chỉ (Quận/Huyện) */}
-                <Text style={GlobalStyles.colorCrimson}>
-                  {props.touched.dc_quận_huyện && props.errors.dc_quận_huyện
-                    ? 'Thông tin không chính xác'
-                    : ''}
-                </Text>
-                <Text style={GlobalStyles.label}>Quận/Huyện: </Text>
-                <TextInput
-                  style={GlobalStyles.input}
-                  placeholder="Quận/huyện"
-                  onChangeText={props.handleChange('dc_quận_huyện')}
-                  value={props.values.dc_quận_huyện}
-                  onBlur={props.handleBlur('dc_quận_huyện')}
-                />
-
-                {/* địa chỉ (Phường/Xã) */}
-                <Text style={GlobalStyles.colorCrimson}>
-                  {props.touched.dc_phường_xã && props.errors.dc_phường_xã
-                    ? 'Thông tin không chính xác'
-                    : ''}
-                </Text>
-                <Text style={GlobalStyles.label}>Phường/Xã: </Text>
-                <TextInput
-                  style={GlobalStyles.input}
-                  placeholder="Phường/Xã"
-                  onChangeText={props.handleChange('dc_phường_xã')}
-                  value={props.values.dc_phường_xã}
-                  onBlur={props.handleBlur('dc_phường_xã')}
-                />
-
                 {/* địa chỉ */}
                 <Text style={GlobalStyles.colorCrimson}>
                   {props.touched.địa_chỉ && props.errors.địa_chỉ
@@ -209,7 +170,6 @@ export default function DonTamHoanNVQS({navigation}) {
                   value={props.values.địa_chỉ}
                   onBlur={props.handleBlur('địa_chỉ')}
                 />
-
                 {/* MSSV */}
                 <Text style={GlobalStyles.colorCrimson}>
                   {props.touched.mssv && props.errors.mssv
@@ -259,7 +219,6 @@ export default function DonTamHoanNVQS({navigation}) {
                     />
                   </View>
                 </View>
-
                 <View style={GlobalStyles.flexDirRow}>
                   {/* Khóa */}
                   <View style={[GlobalStyles.flex1, GlobalStyles.MR10]}>
@@ -297,45 +256,58 @@ export default function DonTamHoanNVQS({navigation}) {
                     />
                   </View>
                 </View>
-
-                <View style={GlobalStyles.flexDirRow}>
-                  {/* Năm bắt đầu */}
-                  <View style={[GlobalStyles.flex1, GlobalStyles.MR10]}>
-                    <Text style={GlobalStyles.colorCrimson}>
-                      {props.touched.năm_bắt_đầu && props.errors.năm_bắt_đầu
-                        ? 'Thông tin không chính xác'
-                        : ''}
-                    </Text>
-                    <Text style={GlobalStyles.label}>Năm bắt đầu: </Text>
-                    <TextInput
-                      style={GlobalStyles.input}
-                      placeholder="20__"
-                      onChangeText={props.handleChange('năm_bắt_đầu')}
-                      value={props.values.năm_bắt_đầu}
-                      onBlur={props.handleBlur('năm_bắt_đầu')}
-                      keyboardType={'numeric'}
-                      maxLength={4}
-                    />
-                  </View>
-                  {/* Năm kết thúc */}
-                  <View style={GlobalStyles.flex1}>
-                    <Text style={GlobalStyles.colorCrimson}>
-                      {props.touched.năm_kết_thúc && props.errors.năm_kết_thúc
-                        ? 'Thông tin không chính xác'
-                        : ''}
-                    </Text>
-                    <Text style={GlobalStyles.label}>Năm kết thúc</Text>
-                    <TextInput
-                      style={GlobalStyles.input}
-                      placeholder="20__"
-                      onChangeText={props.handleChange('năm_kết_thúc')}
-                      value={props.values.năm_kết_thúc}
-                      onBlur={props.handleBlur('năm_kết_thúc')}
-                      keyboardType={'numeric'}
-                      maxLength={4}
-                    />
-                  </View>
+                {/* Học kỳ */}
+                <Text style={GlobalStyles.colorCrimson}>
+                  {props.touched.học_kỳ && props.errors.học_kỳ
+                    ? 'Thông tin không chính xác'
+                    : ''}
+                </Text>
+                <Text style={GlobalStyles.label}>Học kỳ: </Text>
+                <View style={GlobalStyles.picker}>
+                  <Picker
+                    selectedValue={props.values.học_kỳ}
+                    onValueChange={props.handleChange('học_kỳ')}>
+                    <Picker.Item label="1" value={'1'} />
+                    <Picker.Item label="2" value={'2'} />
+                    <Picker.Item label="hè" value={'hè'} />
+                  </Picker>
                 </View>
+                {/* Hệ */}
+                <Text style={GlobalStyles.colorCrimson}>
+                  {props.touched.hệ && props.errors.hệ
+                    ? 'Thông tin không chính xác'
+                    : ''}
+                </Text>
+                <Text style={GlobalStyles.label}>Hệ: </Text>
+                <View style={GlobalStyles.picker}>
+                  <Picker
+                    selectedValue={props.values.hệ}
+                    onValueChange={props.handleChange('hệ')}>
+                    <Picker.Item label="CĐ Chính Quy" value={'CĐ Chính Quy'} />
+                    <Picker.Item label="CĐ Nghề" value={'CĐ Nghề'} />
+                    <Picker.Item
+                      label="Trung Cấp Chuyên Nghiệp"
+                      value={'Trung Cấp Chuyên Nghiệp'}
+                    />
+                  </Picker>
+                </View>
+
+                {/* Lý do */}
+                <Text style={GlobalStyles.colorCrimson}>
+                  {props.touched.lý_do && props.errors.lý_do
+                    ? 'Thông tin không chính xác'
+                    : ''}
+                </Text>
+                <Text style={GlobalStyles.label}>Lý do: </Text>
+                <TextInput
+                  style={GlobalStyles.input}
+                  placeholder="Lý do"
+                  onChangeText={props.handleChange('lý_do')}
+                  value={props.values.lý_do}
+                  onBlur={props.handleBlur('lý_do')}
+                  multiline={true}
+                />
+
                 {/* bị kỷ luật? */}
                 <Text style={GlobalStyles.label}>
                   Có bị cảnh cáo từ hình thức kỷ luật không?:
