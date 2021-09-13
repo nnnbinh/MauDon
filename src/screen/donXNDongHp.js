@@ -35,6 +35,7 @@ export default function DonXNDongHP({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
+              form: 'đơn xác nhận đóng học phí',
               tên: '',
               mssv: '',
               lớp: '',

@@ -60,6 +60,7 @@ export default function DonXacNhanNoMon({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
+              form: 'đơn xác nhận nợ môn',
               tên: '',
               ngày_sinh: 'Chọn ngày',
               nơi_sinh: '',

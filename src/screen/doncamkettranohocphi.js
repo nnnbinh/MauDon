@@ -80,6 +80,7 @@ export default function DonCamKetTraNoHP({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
+              form: 'đơn cam kết trả nợ học phí',
               tên: '',
               ngày_sinh: 'Chọn ngày',
               giới_tính: 'nam',

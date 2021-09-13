@@ -53,6 +53,7 @@ export default function DonDkHocThiLai({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
+              form: 'Đơn đăng kỳ học lại - thi lại',
               tên: '',
               ngày_sinh: 'Chọn ngày',
               mssv: '',

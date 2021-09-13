@@ -58,6 +58,7 @@ export default function DonGiahanHP({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
+              form: 'Đơn xin gia hạn học phí',
               tên: '',
               ngày_sinh: 'Chọn ngày',
               mssv: '',

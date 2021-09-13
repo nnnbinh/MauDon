@@ -51,6 +51,7 @@ export default function GiayXacNhanMienGiamHPNDH({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
+              form: 'Giấy xác nhận miễn giảm học phí ngành độc hại',
               tên: '',
               mssv: '',
               ngày_sinh: 'Chọn ngày',

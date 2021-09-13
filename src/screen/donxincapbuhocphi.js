@@ -49,6 +49,7 @@ export default function DonXinCapBuHocPhi({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
+              form: 'đơn xin cấp bù học phí',
               tên: '',
               ngày_sinh: 'Chọn ngày',
               nơi_sinh: '',

@@ -81,6 +81,7 @@ export default function DonXinVayVonNHCS({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
+              form: 'đơn xin vay vốn ngân hàng chính sách',
               tên: '',
               ngày_sinh: 'Chọn ngày',
               giới_tính: 'nam',
