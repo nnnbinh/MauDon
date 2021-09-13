@@ -50,6 +50,7 @@ export default function GxnSinhVien({navigation}) {
             enableReinitialize={true}
             validationSchema={ReviewSchema}
             initialValues={{
+              form: 'Giấy xác nhận sinh viên',
               tên: '',
               ngày_sinh: 'Chọn ngày',
               giới_tính: 'nam',
